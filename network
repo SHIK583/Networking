@@ -371,3 +371,10 @@ So when whitelist issue happens:
 👉 Private IP = internal identity
 👉 Public IP = internet identity (visible to WhatsApp)
 
+One-line memory trick
+
+👉 tcpdump = “exact truth of network communication”
+Why is TCP Dump required?
+
+👉 tcpdump is a network packet capture tool used to see what is actually happening on the network level.
+
