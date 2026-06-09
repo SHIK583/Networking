@@ -1,0 +1,373 @@
+TCP: Transmission control protocol. It is most used portocal which can ensure that data is delivered reliably to the correct order between devices.
+Three way handshake: most simple expalintion that it can setuo the connection betwwen the client and server first to check if teh both party are ready(TCP pehle ek “handshake” karta hai to confirm both sides are ready.
+
+🔐 TCP Three-Way Handshake (Easy Explanation)
+
+Jab bhi 2 systems (client aur server) connection banate hain (jaise ESB → WhatsApp), TCP pehle ek “handshake” karta hai to confirm both sides are ready.
+
+🔁 Step-by-Step Flow
+✅ 1. SYN (Client → Server)
+
+👉 Client bolta hai:
+
+“Hi server, mujhe tumse connection banana hai”
+
+📦 Packet: SYN
+
+👉 Example:
+ESB → WhatsApp
+“Can I connect?”
+
+✅ 2. SYN-ACK (Server → Client)
+
+👉 Server reply karta hai:
+
+“Okay, main ready hoon + I also acknowledge your request”
+
+📦 Packet: SYN + ACK
+
+👉 Meaning:
+✔ I received your request
+✔ I am also ready to connect
+
+✅ 3. ACK (Client → Server)
+
+👉 Client final confirm karta hai:
+
+“Perfect, I also confirm connection is established”
+
+📦 Packet: ACK
+
+🎯 Final Result
+
+After this:
+
+✔ Connection is established
+✔ Data transfer start ho sakta hai
+
+📊 Simple Diagram
+Client (ESB)        Server (WhatsApp)
+     |  SYN   -------------------->
+     |         <--------------------  SYN-ACK
+     |  ACK   -------------------->
+     | 
+     | ===== CONNECTION ESTABLISHED =====
+❌ Agar issue ho jaye (your case link)
+
+If handshake breaks like:
+
+SYN sent ✔
+SYN-ACK missing ❌
+or wrong ACK ❌
+
+👉 Then:
+
+Connection fail
+Timeout
+RST packet sent (reset) Proxy sends RST (Reset)
+
+👉 Meaning: “I am aborting this connection”
+💡 One-line memory trick
+
+👉 SYN = I want to connect
+👉 SYN-ACK = I accept + ready
+👉 ACK = connection confirmed
+
+
+Simple answer to your question
+
+👉 Your IP = Private IP (internal ESB/Sky-high proxy side)
+👉 Their IP = Public IP (WhatsApp / external endpoint side)
+
+💡 One-line memory trick
+
+👉 Private IP = “inside company network”
+👉 Public IP = “internet reachable system”
+
+🧠 What is ESB Application?
+
+👉 ESB = Enterprise Service Bus
+
+💡 Simple meaning:
+
+ESB is like a middleman system that connects different applications together.
+
+📌 Example:
+
+Think like this:
+
+App A (your system)
+App B (WhatsApp / CRM / billing system)
+
+👉 Instead of connecting directly, ESB sits in between and manages communication.
+
+🧩 What ESB does:
+Sends messages between systems
+Converts formats (if needed)
+Routes requests to correct system
+Tracks communication
+
+👉 In short: ESB = Communication bridge between systems
+
+
+🌐 What is Sky-high Proxy?
+
+👉 Sky-high proxy is a network gateway / security middle layer
+
+💡 Simple meaning:
+
+It is like a security gate + traffic controller between ESB and internet.
+
+📌 What it does:
+Controls outgoing internet traffic
+Applies security rules
+Routes requests to external systems (like WhatsApp)
+Helps in monitoring & logging
+
+👉 In short:
+Sky-high proxy = Gateway to internet with security control
+
+🔁 Simple Flow (your case)
+ESB Application
+      ↓
+Sky-high Proxy
+      ↓
+Internet
+      ↓
+WhatsApp / External API
+
+🔍 How we check connection (simple ways)
+✅ 1. TCP Dump (what you already used)
+
+👉 Captures network packets
+
+You check:
+
+SYN sent or not
+SYN-ACK received or not
+RST / timeout issues
+✅ 2. Ping test (basic check)
+ping 125.17.6.13
+
+👉 checks if server is reachable
+
+✅ 3. Telnet test (port check)
+telnet 125.17.6.13 443
+
+👉 checks if port is open
+
+✅ 4. Curl test (API check)
+curl https://api.whatsapp.com
+✅ 5. Log check (ESB logs)
+
+👉 to see:
+
+request sent
+response received
+timeout errors
+💡 One-line summary
+ESB = systems ko connect karne wala middle layer
+Sky-high proxy = internet gateway/security control
+Connection check = ping + telnet + tcpdump + logs
+
+If you want, I can also explain:
+✔ 
+ESB vs API Gateway difference
+✔ 
+Real interview questions on ESB
+✔ 
+Or your WhatsApp issue mapped exactly in this flow (very useful for understanding)
+
+curl command used for?
+🌐 What is curl command used for?
+
+👉 curl = Client URL
+
+It is a command-line tool used to send and receive data from a server over the internet.
+
+💡 Simple meaning:
+
+👉 curl is used to check if a URL / API is working or not
+
+📌 What it does:
+✅ 1. Test API / URL response
+curl https://api.whatsapp.com
+
+👉 Checks if server is responding
+
+✅ 2. Send request to API (GET/POST)
+curl -X GET https://example.com
+
+👉 Used to fetch data from server
+
+✅ 3. Send data to server (POST request)
+curl -X POST https://api.example.com/login -d "user=abc&pass=123"
+
+👉 Used to send data like login, OTP, form data
+
+✅ 4. Check HTTPS connection
+
+👉 Useful in your ESB/WhatsApp case to verify connectivity
+
+🧠 In your job context (very important)
+
+You use curl to check:
+
+✔ API is reachable or not
+✔ SSL/HTTPS working or not
+✔ Response is coming or timeout
+✔ Integration between ESB → external system
+
+🔁 Simple example in your scenario
+ESB → curl → WhatsApp API
+
+👉 If response comes = connection OK
+👉 If timeout = network issue / firewall / whitelist issue
+
+💡 One-line memory trick
+
+👉 curl = “browser without UI” for testing APIs
+
+If you want, I can also explain:
+✔ 
+curl vs ping vs telnet difference
+✔ 
+real ESB troubleshooting flow using curl
+✔ or 
+interview questions based on curl (very common)
+
+means after the ping and telnet give the connect okay then we can check the curl to identify the whitelist issue?
+
+Yes 👍 you are thinking in the right direction — let’s make it clear step by step.
+
+🔁 Correct Troubleshooting Flow
+✅ Step 1: Ping
+
+👉 Checks basic network reachability
+
+ping 125.17.6.13
+
+✔ If reply comes → network path is reachable
+❌ If not → routing/firewall issue
+
+✅ Step 2: Telnet
+
+👉 Checks port connectivity
+
+telnet 125.17.6.13 443
+
+✔ If connected → port is open
+❌ If failed → firewall / port block / whitelist issue
+
+✅ Step 3: Curl
+
+👉 Checks application/API level connectivity
+
+curl https://api.whatsapp.com
+
+✔ If response comes → API is reachable
+❌ If timeout/403/SSL issue → application-level issue
+
+🎯 Now your main question:
+❓ “Can we use curl after ping & telnet to identify whitelist issue?”
+✔ YES — but with understanding:
+
+👉 Curl helps confirm real API-level behavior, not just network reachability.
+
+⚠️ Important clarity
+❌ Ping/Telnet only tells:
+Network is reachable
+Port is open
+
+BUT
+
+❌ They DO NOT confirm:
+API access allowed
+IP is whitelisted
+Application is responding correctly
+✔ Curl tells:
+Is API accepting request?
+Is IP allowed (whitelist check)?
+Is SSL/API working?
+Is timeout happening at application layer?
+🧠 In your case (very important)
+
+If:
+
+Ping ✔
+Telnet ✔
+Curl ❌ (timeout / forbidden)
+
+👉 Then most likely:
+✔ IP not whitelisted
+✔ Firewall blocking API
+✔ Application-level restriction
+
+💡 Simple conclusion
+
+👉 Yes, curl is the final and most important test after ping & telnet
+
+Because:
+
+Ping = basic network
+Telnet = port check
+Curl = real API/whitelist validation
+🧠 One-line memory trick
+
+👉 Ping → reachability
+Telnet → port
+Curl → real service (whitelist/API)
+
+What NAT does
+
+👉 NAT = Network Address Translation
+
+It:
+
+Changes Private IP → Public IP
+Keeps track of sessions
+Maps response back to correct internal system
+📌 Example
+Request:
+172.24.11.172 → 125.17.6.13
+After NAT:
+203.x.x.x (Airtel Public IP) → 125.17.6.13
+⚠️ Why this matters in your issue
+
+If:
+
+NAT IP not whitelisted ❌
+Firewall blocks it ❌
+
+👉 Then:
+
+SYN goes out ✔
+Response fails ❌
+TCP handshake breaks ❌
+Timeout happens
+🧠 2. Full Architecture (Your Case Flow)
+ESB Application
+   (Private IP)
+        ↓
+Sky-high Proxy
+   (Private Network + NAT)
+        ↓
+Airtel Public IP (NAT)
+        ↓
+Internet / Firewall
+        ↓
+WhatsApp API Server
+   (Public IP: 125.17.6.13)
+🔐 Key Insight (Very Important)
+
+👉 WhatsApp NEVER sees your private IP
+👉 They ONLY see your public NAT IP
+
+So when whitelist issue happens:
+✔ It is usually your NAT Public IP that must be whitelisted
+
+💡 One-line memory trick
+
+👉 Private IP = internal identity
+👉 Public IP = internet identity (visible to WhatsApp)
+
